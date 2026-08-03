@@ -168,9 +168,9 @@
                             <option value="0">7:00AM - 9:00PM</option>
                         </optgroup>
                         <optgroup label="Off Hours">
-                            <option value="20">9:00PM - 11:30PM & 5:45AM - 6:45AM</option>
-                            <option value="55">11:30PM - 1:30AM & 4:30AM - 5:45AM</option>
-                            <option value="100">1:30AM - 4:30AM</option>
+                            <option value="1">9:00PM - 11:30PM & 5:45AM - 6:45AM</option>
+                            <option value="2">11:30PM - 1:30AM & 4:30AM - 5:45AM</option>
+                            <option value="3">1:30AM - 4:30AM</option>
                         </optgroup>
                     </select>
                 </div>
@@ -515,44 +515,47 @@
         }
     }
 
+    // fares: [7AM-9PM, 9PM-11:30PM & 5:45-6:45AM, 11:30PM-1:30AM & 4:30-5:45AM, 1:30AM-4:30AM]
+    // offHours:false destinations have no off-hours service at all (fares[1..3] are null)
     const LOCATIONS = {
         "Islands": [
-            { name: "Chebeague (Chandler Cove)", fare: 90,  fee: 0 },
-            { name: "Chebeague (Stone Pier)",    fare: 140, fee: 0 },
-            { name: "Chebeague (Boat Yard)",     fare: 140, fee: 0 },
-            { name: "Clapboard",                  fare: 85,  fee: 0 },
-            { name: "Cliff",                      fare: 110, fee: 0 },
-            { name: "Cow",                        fare: 75,  fee: 0 },
-            { name: "Cushing",                    fare: 65,  fee: 0 },
-            { name: "Diamond Cove",               fare: 75,  fee: 0 },
-            { name: "Eagle",                      fare: 300, fee: 0 },
-            { name: "Fort Gorges",                fare: 75,  fee: 0 },
-            { name: "Great Diamond",              fare: 65,  fee: 0 },
-            { name: "House",                      fare: 60,  fee: 0 },
-            { name: "Jewell",                     fare: 200, fee: 0 },
-            { name: "Little Chebeague",           fare: 140,  fee: 0 },
-            { name: "Little Diamond",             fare: 60,  fee: 0 },
-            { name: "Long",                       fare: 75,  fee: 0 },
-            { name: "Peaks",                      fare: 65,  fee: 0 },
-            { name: "Pumpkin Knob",               fare: 70,  fee: 0 },
-            { name: "Sand",                       fare: 105, fee: 0 }
+            { name: "Chebeague (Chandler Cove)", fee: 0, fares: [90, 110, 145, 285] },
+            { name: "Chebeague (Stone Pier)",    fee: 0, fares: [140, 160, 195, 385] },
+            { name: "Chebeague (Boat Yard)",     fee: 0, fares: [140, 160, 195, 385] },
+            { name: "Clapboard",                 fee: 0, fares: [85, 105, 140, 280] },
+            { name: "Cliff",                     fee: 0, fares: [110, 130, 165, 315] },
+            { name: "Cow",                       fee: 0, fares: [75, 95, 130, 255] },
+            { name: "Cushing",                   fee: 0, fares: [65, 85, 120, 235] },
+            { name: "Diamond Cove",              fee: 0, fares: [75, 95, 130, 255] },
+            { name: "Eagle",                     fee: 0, fares: [300, null, null, null], offHours: false },
+            { name: "Fort Gorges",               fee: 0, fares: [150, null, null, null], offHours: false, roundTripOnly: true },
+            { name: "Great Diamond",             fee: 0, fares: [65, 85, 120, 235] },
+            { name: "House",                     fee: 0, fares: [60, 80, 115, 225] },
+            { name: "Jewell",                    fee: 0, fares: [200, null, null, null], offHours: false },
+            { name: "Little Chebeague",          fee: 0, fares: [140, null, null, null], offHours: false },
+            { name: "Little Diamond",            fee: 0, fares: [60, 80, 115, 225] },
+            { name: "Long",                      fee: 0, fares: [75, 95, 130, 255] },
+            { name: "Peaks",                     fee: 0, fares: [65, 85, 120, 235] },
+            { name: "Pumpkin Knob",              fee: 0, fares: [70, 90, 125, 250] },
+            { name: "Sand",                      fee: 0, fares: [140, null, null, null], offHours: false },
+            { name: "Bustins",                   fee: 0, fares: [300, 320, 355, 710] }
         ],
         "Ports": [
-            { name: "Portland",               fare: 0,   fee: 0  },
-            { name: "Portland Yacht Services",fare: 80,  fee: 80 },
-            { name: "Bug Light",              fare: 40,  fee: 10 },
-            { name: "Cousins Island",         fare: 120, fee: 0  },
-            { name: "Centerboard",            fare: 40,  fee: 10 },
-            { name: "DiMillos",               fare: 0,   fee: 5  },
-            { name: "Dolphin Marina",         fare: 300, fee: 0  },
-            { name: "East End Beach",         fare: 60,  fee: 20 },
-            { name: "Falmouth",               fare: 100, fee: 45 },
-            { name: "Fore Points",            fare: 30,  fee: 10 },
-            { name: "Maine Yacht Center",     fare: 60,  fee: 30 },
-            { name: "Mavodones Landing",      fare: 0,  fee: 10 },
-            { name: "Saltwater Grille",       fare: 40,  fee: 10 },
-            { name: "Southport",              fare: 60,  fee: 50 },
-            { name: "Spring Point",           fare: 60,  fee: 10 }
+            { name: "Portland",                fee: 0,  fares: [0, 0, 0, 0] },
+            { name: "Portland Yacht Services",  fee: 80, fares: [80, 100, 135, 180] },
+            { name: "Bug Light",                fee: 10, fares: [40, 60, 95, 185] },
+            { name: "Cousins Island",           fee: 0,  fares: [130, 150, 185, 370] },
+            { name: "Centerboard",              fee: 10, fares: [40, 60, 95, 140] },
+            { name: "DiMillos",                 fee: 5,  fares: [0, 20, 55, 100] },
+            { name: "Dolphin Marina",           fee: 0,  fares: [300, null, null, null], offHours: false },
+            { name: "East End Beach",           fee: 20, fares: [60, 70, 105, 210] },
+            { name: "Falmouth",                 fee: 45, fares: [100, 120, 155, 310] },
+            { name: "Fore Points",              fee: 10, fares: [40, 60, 95, 185] },
+            { name: "Maine Yacht Center",       fee: 25, fares: [70, 90, 120, 240] },
+            { name: "Mavodones Landing",        fee: 10, fares: [0, 20, 55, 100] },
+            { name: "Saltwater Grille",         fee: 10, fares: [40, 60, 95, 185] },
+            { name: "Southport",                fee: 50, fares: [70, 90, 120, 240] },
+            { name: "Spring Point",             fee: 10, fares: [60, 80, 115, 160] }
         ]
     };
 
@@ -595,25 +598,24 @@
     function fareCalculator() {
         const fromSel = document.getElementById("from").value;
         const toSel   = document.getElementById("to").value;
-        const deTime  = +document.getElementById("deTime").value;
+        const tierSel = document.getElementById("deTime").value;
+        const tier    = tierSel === "" ? NaN : +tierSel;
 
         const fareOutWrap = document.getElementById("fare-output");
         const fareText    = document.getElementById("fare");
         const hr          = document.getElementById("hr");
         const hr1         = document.getElementById("hr1");
         const prepay      = document.getElementById("prepay");
-        const rs          = document.getElementById("rs");
         const button      = document.getElementById("button");
 
         // Basic validation
-        if (!fromSel || !toSel || isNaN(deTime)) {
+        if (!fromSel || !toSel || isNaN(tier)) {
             fareOutWrap.style.display = "block";
             hr.style.display = "block";
             fareText.style.display = "block";
             fareText.textContent = "Please select a From, To, and Departure Time.";
             hr1.style.display = "none";
             prepay.style.display = "none";
-            rs.style.display = "none";
             button.style.display = "none";
             return;
         }
@@ -621,32 +623,34 @@
         const from = getLocationByValue(fromSel);
         const to   = getLocationByValue(toSel);
 
-        // Base price: highest of (from.fee + to.fare) vs (to.fee + from.fare)
-        const base = Math.max(from.fee + to.fare, to.fee + from.fare);
-
-        // Time surcharge: simply add the selected surcharge
-        const total = base + deTime;
-
-        // Output
         fareOutWrap.style.display = "block";
         hr.style.display = "block";
         fareText.style.display = "block";
-        fareText.textContent = `$${total}.00      One-way flat rate for up to six people.`;
         hr1.style.display = "block";
         button.style.display = "block";
 
-        // Notes
-        if (deTime > 0) {
-            prepay.style.display = "block";
-        } else {
+        // Fort Gorges is a round-trip-only, day-of-reservation fare — doesn't fit the one-way model
+        if (from.roundTripOnly || to.roundTripOnly) {
+            const fg = from.roundTripOnly ? from : to;
+            fareText.textContent = `Fort Gorges is $${fg.fares[0]}.00 round-trip, day-of reservations only. Please call to check availability.`;
             prepay.style.display = "none";
+            return;
         }
 
-        if (deTime <= 20) {
-            rs.style.display = "block";
-        } else {
-            rs.style.display = "none";
+        // Some destinations have no off-hours service at all
+        if (tier > 0 && (from.offHours === false || to.offHours === false)) {
+            fareText.textContent = "Not available outside 7:00AM–9:00PM for this destination — please call to check availability.";
+            prepay.style.display = "none";
+            return;
         }
+
+        // Base price: highest of (from.fee + to.fare) vs (to.fee + from.fare) for the selected time tier
+        const total = Math.max(from.fee + to.fares[tier], to.fee + from.fares[tier]);
+
+        fareText.textContent = `$${total}.00      One-way flat rate for up to six people.`;
+
+        // Prepayment + 20% auto gratuity applies to the two latest-night tiers
+        prepay.style.display = tier >= 2 ? "block" : "none";
     }
 
     if (!('remove' in Element.prototype)) {
