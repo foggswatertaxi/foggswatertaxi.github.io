@@ -659,7 +659,8 @@ document.getElementById('cal-next').addEventListener('click', () => {
         ${badges}
         <span class="badge rounded-pill border border-white border-opacity-75 text-white fw-normal fs-6">${c.time}</span>
       </div>
-      <p class="mt-3 mb-4">${c.desc}</p>
+      <p class="mt-3 mb-2">${c.desc}</p>
+      <p class="fw-semibold mb-4">We are now in our off season — check back in the spring for public tours!</p>
       <div class="d-flex flex-wrap align-items-center gap-2">
         <a href="${c.bookUrl}" class="btn btn-light text-info fw-semibold">Book Now</a>
         <a href="${c.infoUrl}" class="btn btn-outline-light">More Info</a>
@@ -678,14 +679,6 @@ document.getElementById('cal-next').addEventListener('click', () => {
     `<div class="row align-items-center g-3">${textCol}${imgCol}</div>`;
 })();
 </script>
-
-<!-- PROMO TOAST -->
-<div id="promo-toast" class="promo-toast">
-    <div class="promo-toast-inner">
-        <span><strong>50% off</strong> 2+ tickets — use code <strong>BOGO</strong> &nbsp;·&nbsp; <a href="cruises" class="text-white fw-semibold" style="text-decoration:underline;">Midday &amp; Sunset Cruises</a></span>
-        <button class="promo-toast-close" onclick="document.getElementById('promo-toast').style.display='none'" aria-label="Dismiss">&times;</button>
-    </div>
-</div>
 
 <!-- LocalBusiness structured data -->
 <script type="application/ld+json">
